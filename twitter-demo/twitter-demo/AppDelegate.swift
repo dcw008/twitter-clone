@@ -51,23 +51,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         twitterClient?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) -> Void in
             print("I got an access token")
             
-//            twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task:<#URLSessionDataTask#>,response: <#Any?#>) in
-//                print("account \(response)")
+            twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                print("account \(response)")
+                let userDictionary = response as! NSDictionary
+                let user = User(dictionary: userDictionary)
+                print("name: \(user.name)")
+                print("screenname: \(user.screenname)")
+                print("profile url: \(user.profileUrl)")
+                print("description: \(user.tagline)")
+            }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+            
+            })
+            
+            twitterClient?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                let dictionaries = response as! [NSDictionary]
+                
+                let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+                for tweet in tweets {
+                    print("\(tweet.text!)")
+                }
+            }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+                
+            })
+            
+        }) { (error: Error?) -> Void in
+                print("error: \(error?.localizedDescription)")
+        }
+
+        
+//            twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task:URLSessionDataTask,response: <#Any?#>) in
+//                let user = response as! NSDictionary
+//                print("name: \(user[name])")
+////                print("account \(response)")
 //            }, failure: { (task:<#URLSessionDataTask?#>,error: <#Error#>) in
 //                
 //            })
             
-            twitterClient?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-                print("account \(response)")
-                
-               
-            }) { (task: URLSessionDataTask?, error: Error) in
+//        twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+//            //print("account \(response)")
+//            let user = response as! NSDictionary
+//            print("name: \(user["name"])")
+//            
+//                
+//            }) { (task: URLSessionDataTask?, error: Error) in
+//                
+//            }
+//            
+//        }, failure: { (error: Error?) -> Void in
+//            print("error \(error!.localizedDescription)")
+//        })
+            
 
-            }
+        
+        
 
-        }, failure: { (error: Error?) -> Void in
-            print("error \(error!.localizedDescription)")
-        })
     
         return true
     }
