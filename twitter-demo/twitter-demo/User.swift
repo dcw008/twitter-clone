@@ -29,5 +29,11 @@ class User: NSObject {
         
         
     }
+    
+    class var currentUser: Usert?{
+        get{
+            
+        }
+    }
 
 }
