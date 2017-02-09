@@ -1,22 +1,21 @@
-//
-//  User.swift
-//  twitter-demo
-//
-//  Created by Derrick Wong on 2/4/17.
-//  Copyright © 2017 Derrick Wong. All rights reserved.
-//
-
 import UIKit
 
 class User: NSObject {
+    
+    
+    
     
     var name: String?
     var screenname: String?
     var profileUrl: NSURL?
     var tagline: String?
     
+    var dictionary: NSDictionary?
     
-    init(dictionary: NSDictionary){
+    init(dictionary: NSDictionary) {
+        
+        self.dictionary = dictionary
+        
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
         
@@ -26,14 +25,45 @@ class User: NSObject {
         }
         
         tagline = dictionary["description"] as? String
-        
-        
     }
     
-    class var currentUser: Usert?{
-        get{
+    static var _currentUser: User?
+    static var userDidLogutNotification = "userDidLogout"
+    
+    class var currentUser: User? {
+        
+        
+        get {
+            if _currentUser == nil {
+                let defaults = UserDefaults.standard
+                let userData = defaults.object(forKey: "currentUserData") as? Data
+                
+                if let userData = userData {
+                    let dictionary = try! JSONSerialization.jsonObject(with: userData, options: []) as! NSDictionary
+                    _currentUser = User(dictionary: dictionary)
+                }
+            }
             
+            return _currentUser
+        }
+        
+        // save current user to disk
+        set(user) {
+            
+            _currentUser = user
+            
+            let defaults = UserDefaults.standard
+            
+            if let user = user {
+                let data = try! JSONSerialization.data(withJSONObject: user.dictionary!, options: [])
+                
+                defaults.set(data, forKey: "currentUserData")
+            } else {
+                
+                defaults.set(nil, forKey: "currentUserData")
+            }
+            
+            defaults.synchronize()
         }
     }
-
 }
