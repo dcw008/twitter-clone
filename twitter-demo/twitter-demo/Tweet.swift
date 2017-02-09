@@ -9,6 +9,9 @@
 import UIKit
 
 class Tweet: NSObject {
+    var userName: String?
+    var screenName: String?
+    var profileImageUrl: String?
     var text: String?
     var timeStamp: Date?
     var retweetCount: Int = 0

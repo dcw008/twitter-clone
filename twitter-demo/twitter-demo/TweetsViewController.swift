@@ -23,6 +23,8 @@ class TweetsViewController: UIViewController {
             for tweet in tweets{
                 print(tweet.text)
             }
+            
+            
         }, failure: { (error: Error) in
             print(error.localizedDescription)
         })
