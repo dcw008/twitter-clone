@@ -14,19 +14,28 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBOutlet weak var tableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         tableView.dataSource = self
         tableView.delegate = self
+        
+        
+        
+        self.tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        
+        
+
         
         //get the home timeline
         TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets:[Tweet]) in
             
             self.tweets = tweets
-            //self.reloadData()
+            self.tableView.reloadData()
             for tweet in tweets{
                 print(tweet.text)
             }
@@ -46,7 +55,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
-        return tweets.count
+        if tweets != nil{
+            return tweets.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
