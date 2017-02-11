@@ -27,18 +27,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        
-        
-
-        
         //get the home timeline
         TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets:[Tweet]) in
             
             self.tweets = tweets
             self.tableView.reloadData()
-            for tweet in tweets{
-                print(tweet.text)
-            }
+//            for tweet in tweets{
+//                print(tweet.text)
+//            }
             
             
         }, failure: { (error: Error) in
@@ -70,6 +66,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    //deselects the gray area after user pushes on the cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        //deselect of the gray cell
+        tableView.deselectRow(at: indexPath, animated:true)
+    }
+    
     
     
     @IBAction func onLogOutButton(_ sender: Any) {
@@ -77,14 +79,29 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         TwitterClient.sharedInstance?.logout()
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        //get the tweet associated with the current cell
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+      
+        let tweet = tweets[indexPath!.row]
+        
+        print(tweet.text)
+        
+        let detailViewController = segue.destination as! DetailsTweetController
+        
+        
+        //pass the tweet
+        detailViewController.tweet = tweet
+        
     }
-    */
+
 
 }
