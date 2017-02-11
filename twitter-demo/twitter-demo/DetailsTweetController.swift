@@ -12,11 +12,26 @@ class DetailsTweetController: UIViewController {
 
 
     
-    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profilePicture: UIImageView!{
+        didSet{
+            profilePicture.layer.cornerRadius = 3
+            //clip the bitmap the imageview contains
+            profilePicture.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var retweetsCountLabel: UILabel!
+    
+    @IBOutlet weak var favoritesCountLabel: UILabel!
+    
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    var favoritesClicked = false;
     
     var tweet: Tweet!
     
@@ -33,6 +48,8 @@ class DetailsTweetController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
     //setup the UI on the view
     func loadUI(){
@@ -52,11 +69,28 @@ class DetailsTweetController: UIViewController {
 
         self.timeStampLabel.text = "\(timestamp)"
         
-        
+        self.favoritesCountLabel.text = "\(tweet.favoritesCount)"
+        self.retweetsCountLabel.text = "\(tweet.retweetCount)"
         
         
     }
     
+    
+    @IBAction func onFavoriteClicked(_ sender: Any) {
+        
+        //var favoritesCount = tweet.favoritesCount
+        if(favoritesClicked == false){
+            tweet.favoritesCount += 1
+            favoritesClicked = true
+        } else{
+            tweet.favoritesCount -= 1
+            favoritesClicked = false
+        }
+        
+        self.favoritesCountLabel.text = "\(tweet.favoritesCount)"
+        
+    }
+
 
     /*
     // MARK: - Navigation

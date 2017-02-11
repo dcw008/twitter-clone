@@ -24,7 +24,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         loginFailure = failure
         deauthorize()
         fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "twitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential?) -> Void in
-            print("I got a token")
+            //print("I got a token")
             
             let url = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\((requestToken?.token)!)")!
             
@@ -73,7 +73,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
         
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            print("account \(response)")
+            //print("account \(response)")
             let userDictionary = response as! NSDictionary
             let user = User(dictionary: userDictionary)
             success(user)

@@ -93,7 +93,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
       
         let tweet = tweets[indexPath!.row]
         
-        print(tweet.text)
+        //print(tweet.text)
         
         let detailViewController = segue.destination as! DetailsTweetController
         
