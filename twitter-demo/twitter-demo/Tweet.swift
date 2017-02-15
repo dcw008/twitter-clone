@@ -19,7 +19,7 @@ class Tweet: NSObject {
     var retweetCount: Int = 0
     var favoritesCount: Int = 0
     
-    
+    //tweet constructor
     init(dictionary: NSDictionary){
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
@@ -43,15 +43,18 @@ class Tweet: NSObject {
         
     }
     
+    
     class func tweetsWithArray(dictionaries: [NSDictionary]) -> [Tweet]{
+        //array of tweets
         var tweets = [Tweet]()
         
-        //iterate through all dictionary and create a tweet based on the dictionary and then add it back to the array
+        //iterate through all dictionaries and create a tweet based on the dictionary and then add it back to the array
         for dictionary in dictionaries {
             let tweet = Tweet(dictionary: dictionary)
             tweets.append(tweet)
         }
         
+        //return the array
         return tweets
         
     }

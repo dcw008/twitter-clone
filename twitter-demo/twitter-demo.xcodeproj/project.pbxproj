@@ -18,6 +18,7 @@
 		4CC74E471E4C4CF0004FFC51 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC74E461E4C4CF0004FFC51 /* TweetCell.swift */; };
 		4CC74E4B1E4DB6A6004FFC51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC74E4A1E4DB6A6004FFC51 /* Assets.xcassets */; };
 		4CC74E4D1E4F0E57004FFC51 /* DetailsTweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC74E4C1E4F0E57004FFC51 /* DetailsTweetController.swift */; };
+		4CF1DCC11E54020E0056CE0D /* CreateTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF1DCC01E54020E0056CE0D /* CreateTweetViewController.swift */; };
 		8ADC225DDA836E7BD439C30F /* Pods_twitter_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0799DBDB15836D3913C6FD01 /* Pods_twitter_demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		4CC74E461E4C4CF0004FFC51 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		4CC74E4A1E4DB6A6004FFC51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CC74E4C1E4F0E57004FFC51 /* DetailsTweetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTweetController.swift; sourceTree = "<group>"; };
+		4CF1DCC01E54020E0056CE0D /* CreateTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTweetViewController.swift; sourceTree = "<group>"; };
 		5F59F57388AF08A83300C486 /* Pods-twitter-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter-demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-twitter-demo/Pods-twitter-demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 				4CC74E441E4C4AE0004FFC51 /* TweetsViewController.swift */,
 				4CC74E4C1E4F0E57004FFC51 /* DetailsTweetController.swift */,
 				4C3377F61E45E75300410FA0 /* LoginViewController.swift */,
+				4CF1DCC01E54020E0056CE0D /* CreateTweetViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				4CC74E471E4C4CF0004FFC51 /* TweetCell.swift in Sources */,
 				4CC74E4D1E4F0E57004FFC51 /* DetailsTweetController.swift in Sources */,
 				4C38BE511E46C02100C13490 /* Tweet.swift in Sources */,
+				4CF1DCC11E54020E0056CE0D /* CreateTweetViewController.swift in Sources */,
 				4C3377F71E45E75300410FA0 /* LoginViewController.swift in Sources */,
 				4CC74E451E4C4AE1004FFC51 /* TweetsViewController.swift in Sources */,
 				4C38BE531E46D06E00C13490 /* TwitterClient.swift in Sources */,

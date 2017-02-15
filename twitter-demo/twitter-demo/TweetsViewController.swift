@@ -78,6 +78,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         TwitterClient.sharedInstance?.logout()
     }
+    
+    
+   
 
     
     // MARK: - Navigation
