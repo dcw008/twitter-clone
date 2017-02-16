@@ -168,7 +168,7 @@
                                             <outlet property="timeStamp" destination="68O-Jx-Q4y" id="1Hs-UK-aCA"/>
                                             <outlet property="tweetText" destination="uge-cV-9tz" id="g1L-YH-bAy"/>
                                             <outlet property="userName" destination="4yS-b5-39q" id="Si1-mr-iYt"/>
-                                            <segue destination="rHZ-EF-siE" kind="show" id="CVf-c0-eTk"/>
+                                            <segue destination="rHZ-EF-siE" kind="show" identifier="viewDetailedTweet" id="CVf-c0-eTk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -190,7 +190,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="AgJ-DN-FjZ">
                             <connections>
-                                <segue destination="Hcj-fT-lcu" kind="presentation" identifier="createTweet" id="E6l-sj-3YZ"/>
+                                <segue destination="qpm-Le-sQG" kind="presentation" identifier="createTweet" id="39G-9l-fVK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -247,6 +247,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="fVi-Il-vgf"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="XUz-2R-rIU">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ab6-c1-7WQ">
                             <connections>
@@ -259,10 +262,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="profileImage" destination="Nqu-0n-OVz" id="aYB-40-qoi"/>
+                        <outlet property="screenNameLabel" destination="qs1-9f-gPG" id="SPa-Iz-dnL"/>
+                        <outlet property="userNameLabel" destination="Me3-Si-w13" id="A35-kP-feU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohh-LP-Yzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2390" y="883"/>
+            <point key="canvasLocation" x="3328.8000000000002" y="882.90854572713647"/>
         </scene>
         <!--Details Tweet Controller-->
         <scene sceneID="hHO-WV-Pgo">
@@ -466,22 +475,22 @@
             <point key="canvasLocation" x="888.79999999999995" y="123.68815592203899"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Kn4-Gp-iAY">
+        <scene sceneID="4lk-QM-s2I">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hcj-fT-lcu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qpm-Le-sQG" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lGy-Jp-oHb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sqn-Sj-aLn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="VcW-Wt-gXp" kind="relationship" relationship="rootViewController" id="XIp-oo-fAd"/>
+                        <segue destination="VcW-Wt-gXp" kind="relationship" relationship="rootViewController" id="LEV-OA-58F"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N8v-30-YiD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Sv-Dr-WNV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621.5999999999999" y="882.90854572713647"/>
+            <point key="canvasLocation" x="2389.5999999999999" y="882.90854572713647"/>
         </scene>
     </scenes>
     <resources>

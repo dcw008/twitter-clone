@@ -10,8 +10,23 @@ import UIKit
 
 class CreateTweetViewController: UIViewController {
     
-    var currentUser: User!
+    
 
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var screenNameLabel: UILabel!
+    
+    var currentUser: User!{
+        didSet{
+            let imageUrl = currentUser.profileUrl!
+            self.profileImage.setImageWith(imageUrl as URL)
+            self.userNameLabel.text = currentUser.name!
+            self.screenNameLabel.text = currentUser.screenname!
+            
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,15 +39,6 @@ class CreateTweetViewController: UIViewController {
     }
     
     @IBAction func onCancelButton(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    @IBAction func onDoneButton(_ sender: Any) {
-        
-        // create tweet!
-        
-        // placeholder code 
         self.dismiss(animated: true, completion: nil)
     }
     /*
