@@ -81,28 +81,40 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
    
-
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        //get the tweet associated with the current cell
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPath(for: cell)
-      
-        let tweet = tweets[indexPath!.row]
-        
-        //print(tweet.text)
-        
-        let detailViewController = segue.destination as! DetailsTweetController
         
         
-        //pass the tweet
-        detailViewController.tweet = tweet
+        //check if sender identifier is requesting to see the detailed tweet.
+        if(segue.identifier == "viewDetailedTweet"){
+            //get the tweet associated with the current cell
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)
+          
+            let tweet = tweets[indexPath!.row]
+            
+            //print(tweet.text)
+            
+            let detailViewController = segue.destination as! DetailsTweetController
+            
+            
+            //pass the tweet
+            detailViewController.tweet = tweet
+            
+        }
+        
+        if(segue.identifier == "createTweet"){
+            
+            //get the current user
+            let user = User._currentUser
+            
+            let createTweetViewController = segue.destination as! CreateTweetViewController
+            
+            createTweetViewController.currentUser = user
+        }
         
     }
 

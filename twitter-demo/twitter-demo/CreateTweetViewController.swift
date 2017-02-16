@@ -9,6 +9,8 @@
 import UIKit
 
 class CreateTweetViewController: UIViewController {
+    
+    var currentUser: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +23,18 @@ class CreateTweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onCancelButton(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 
+    @IBAction func onDoneButton(_ sender: Any) {
+        
+        // create tweet!
+        
+        // placeholder code 
+        self.dismiss(animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
