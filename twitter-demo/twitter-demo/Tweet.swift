@@ -43,6 +43,14 @@ class Tweet: NSObject {
         
     }
     
+    override init(){
+        
+        text = ""
+        retweetCount = 0
+        favoritesCount = 0
+
+    }
+    
     
     class func tweetsWithArray(dictionaries: [NSDictionary]) -> [Tweet]{
         //array of tweets

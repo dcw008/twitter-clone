@@ -15,20 +15,25 @@ class CreateTweetViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var tweetTextView: UITextView!
     
     var currentUser: User!{
         didSet{
-            let imageUrl = currentUser.profileUrl!
-            self.profileImage.setImageWith(imageUrl as URL)
-            self.userNameLabel.text = currentUser.name!
-            self.screenNameLabel.text = currentUser.screenname!
-            
-            
+            let imageUrl = currentUser.profileUrl
+            self.profileImage.setImageWith(imageUrl!)
+            self.userNameLabel.text = currentUser.name
+            self.screenNameLabel.text = currentUser.screenname
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if User.currentUser != nil{
+            currentUser = User.currentUser
+        }
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -41,6 +46,21 @@ class CreateTweetViewController: UIViewController {
     @IBAction func onCancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func onDoneButton(_ sender: Any) {
+        let client = TwitterClient.sharedInstance
+        let text = tweetTextView.text
+        //post to twitter
+        client?.postTweet(text: text!, success: { (tweet: Tweet) in
+            self.tweetTextView.endEditing(true)
+            self.dismiss(animated: true, completion: nil)
+        }, failure: { (error: Error) in
+            print(error.localizedDescription)
+        })
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

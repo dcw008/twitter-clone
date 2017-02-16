@@ -108,13 +108,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if(segue.identifier == "createTweet"){
             
-            //get the current user
-            print("test segue")
-            let user = User.currentUser
-            
-            let createTweetViewController = segue.destination as! CreateTweetViewController
-            
-            createTweetViewController.currentUser = user
+            let composeTweetNavController: UINavigationController = segue.destination as! UINavigationController
+            let composeTweetVC: CreateTweetViewController = composeTweetNavController.topViewController as! CreateTweetViewController
+            // Now set the data:
+//            composeTweetVC.currentUser = User.currentUser
+           
         }
         
     }
