@@ -10,7 +10,14 @@ import UIKit
 
 class TweetCell: UITableViewCell {
     
-    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profilePicture: UIImageView!{
+        didSet{
+            self.profilePicture.isUserInteractionEnabled = true
+            //tap for userImageView
+            let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(profilePictureTapped(tapGestureRecognizer:)))
+            self.profilePicture.addGestureRecognizer(userProfileTap)
+        }
+    }
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var screenName: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
@@ -21,6 +28,11 @@ class TweetCell: UITableViewCell {
     
     var hasRetweeted = false
     var hasFavorited = false
+    
+    func profilePictureTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        performSegueWithIdentifier("segueName", sender: self)
+    }
     
     
     
@@ -58,6 +70,8 @@ class TweetCell: UITableViewCell {
             
         }
     }
+    
+   
     
     //converts the difference from seconds into hrs -> days
     func convertDifference(difference: Int) -> String{

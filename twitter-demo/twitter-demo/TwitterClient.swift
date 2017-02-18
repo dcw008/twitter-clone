@@ -88,17 +88,37 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     //request to post a tweet
-    func postTweet(text: String, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()){
-        post("1.1/statuses/update.json", parameters: text, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            let newTweet = response as! Tweet
-            success(newTweet)
-        }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
-            failure(error)
-        })
-
-        
-    }
+//    func postTweet(text: String, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()){
+//        post("1.1/statuses/update.json", parameters: text, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+//            let newTweet = response as! Tweet
+//            success(newTweet)
+//        }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+//            failure(error)
+//        })
+//
+//        
+//    }
     
+//    class func sendTweet(text: String, callBack: @escaping (_ response: Tweet?, _ error: Error? ) -> Void){
+//        
+//        guard let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else{
+//            callBack(nil, nil)
+//            return
+//        }
+//        let urlString = TwitterClient.sendTweetEndPoint + encodedText
+//        let _ = TwitterClient.shareInstance?.post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:Any?) in
+//            if let tweetDict = response as? [String: Any]{
+//                let tweet = Tweet(tweetDict: tweetDict) //make sure you have your Tweet model ready, and its initializer should take a dictionary as the parameter
+//                callBack(tweet, nil)
+//            }else{
+//                callBack(nil, nil)
+//            }
+//        }, failure: { (task: URLSessionDataTask?, error:Error) in
+//            print(error.localizedDescription)
+//            callBack(nil, error)
+//        })
+//    }
+
     func logout(){
         deauthorize()
         

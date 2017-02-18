@@ -47,18 +47,18 @@ class CreateTweetViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onDoneButton(_ sender: Any) {
-        let client = TwitterClient.sharedInstance
-        let text = tweetTextView.text
-        //post to twitter
-        client?.postTweet(text: text!, success: { (tweet: Tweet) in
-            self.tweetTextView.endEditing(true)
-            self.dismiss(animated: true, completion: nil)
-        }, failure: { (error: Error) in
-            print(error.localizedDescription)
-        })
-        
-    }
+//    @IBAction func onDoneButton(_ sender: Any) {
+//        let client = TwitterClient.sharedInstance
+//        let text = tweetTextView.text
+//        //post to twitter
+//        client?.postTweet(text: text!, success: { (tweet: Tweet) in
+//            self.tweetTextView.endEditing(true)
+//            self.dismiss(animated: true, completion: nil)
+//        }, failure: { (error: Error) in
+//            print(error.localizedDescription)
+//        })
+//        
+//    }
     
     
     /*
