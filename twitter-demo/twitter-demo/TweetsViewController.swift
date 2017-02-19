@@ -63,15 +63,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.tweet = tweets[indexPath.row]
         
-        let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_gesture:)))        
+        let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_gesture:)))
         cell.profilePicture.addGestureRecognizer(userProfileTap)
-         //assign the cell's delegate to this view controller, so that this controller can handle pushing the cell or perform segue
         
         return cell
         
     }
     
     func userProfileTapped(_gesture: UIGestureRecognizer){
+        
         performSegue(withIdentifier: "onProfilePicture", sender: self)
         
     }
@@ -98,15 +98,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         
+        
         //check if sender identifier is requesting to see the detailed tweet.
         if(segue.identifier == "viewDetailedTweet"){
             //get the tweet associated with the current cell
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPath(for: cell)
-          
             let tweet = tweets[indexPath!.row]
-            
-            //print(tweet.text)
             
             let detailViewController = segue.destination as! DetailsTweetController
             
@@ -126,9 +124,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         if(segue.identifier == "onProfilePicture"){
+//            let cell = sender as! UIImageView
+//            let indexPath = tableView.indexPath(for: cell)
+//            let tweet = tweets[indexPath!.row]
+            
             let profileNavigationController: UINavigationController = segue.destination as! UINavigationController
             
             let profileVC: ProfileViewController = profileNavigationController.topViewController as! ProfileViewController
+//            profileVC.tweet = tweet
+            
         }
         
     }

@@ -18,6 +18,7 @@ class Tweet: NSObject {
     var timeStamp: Date?
     var retweetCount: Int = 0
     var favoritesCount: Int = 0
+    var tweetID: String?
     
     //tweet constructor
     init(dictionary: NSDictionary){
@@ -28,6 +29,7 @@ class Tweet: NSObject {
         screenName = "@\(user!["screen_name"] as! String)"
         profileImageUrl = user!["profile_image_url_https"] as? String
         userName = user!["name"] as? String
+        tweetID = dictionary["id_str"] as? String
         
         let timeStampString = dictionary["created_at"] as? String
         

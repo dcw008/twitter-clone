@@ -12,6 +12,9 @@ import BDBOAuth1Manager
 class TwitterClient: BDBOAuth1SessionManager {
     
     
+    static let oAuthBaseUrl = "https://api.twitter.com"
+    static let sendTweetEndPoint = TwitterClient.oAuthBaseUrl + "/1.1/statuses/update.json?status="
+    static let retweetEndpoint = TwitterClient.oAuthBaseUrl + "/1.1/statuses/retweet/:id.json"
     
     var loginSuccess: (()->())?
     var loginFailure: ((Error)->())?
@@ -99,25 +102,45 @@ class TwitterClient: BDBOAuth1SessionManager {
 //        
 //    }
     
-//    class func sendTweet(text: String, callBack: @escaping (_ response: Tweet?, _ error: Error? ) -> Void){
-//        
-//        guard let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else{
-//            callBack(nil, nil)
-//            return
-//        }
-//        let urlString = TwitterClient.sendTweetEndPoint + encodedText
-//        let _ = TwitterClient.shareInstance?.post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:Any?) in
-//            if let tweetDict = response as? [String: Any]{
-//                let tweet = Tweet(tweetDict: tweetDict) //make sure you have your Tweet model ready, and its initializer should take a dictionary as the parameter
-//                callBack(tweet, nil)
-//            }else{
-//                callBack(nil, nil)
-//            }
-//        }, failure: { (task: URLSessionDataTask?, error:Error) in
-//            print(error.localizedDescription)
-//            callBack(nil, error)
-//        })
-//    }
+    class func sendTweet(text: String, callBack: @escaping (_ response: Tweet?, _ error: Error? ) -> Void){
+        
+        guard let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else{
+            callBack(nil, nil)
+            return
+        }
+        let urlString = TwitterClient.sendTweetEndPoint + encodedText
+        let _ = TwitterClient.sharedInstance?.post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:Any?) in
+            if let tweetDict = response as? [String: Any]{
+                let tweet = Tweet(dictionary: tweetDict as NSDictionary) //make sure you have your Tweet model ready, and its initializer should take a dictionary as the parameter
+                callBack(tweet, nil)
+            }else{
+                callBack(nil, nil)
+            }
+        }, failure: { (task: URLSessionDataTask?, error:Error) in
+            print(error.localizedDescription)
+            callBack(nil, error)
+        })
+    }
+    
+    class func retweet(id: String, callBack: @escaping (_ response: Tweet?, _ error: Error?) -> Void){
+        TwitterClient.sharedInstance?.post(retweetEndpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            if let tweetDict = response as? [String: Any]{
+                var tweet: Tweet?
+                if let originalTweetDict = tweetDict["retweeted_status"] as? [String: Any]{
+                    tweet = Tweet(dictionary: originalTweetDict as NSDictionary)
+                }
+                
+                callBack(tweet, nil)
+            } else {
+                callBack(nil, nil)
+            }
+        
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            print(error.localizedDescription)
+            callBack(nil, error)
+            
+        })
+    }
 
     func logout(){
         deauthorize()

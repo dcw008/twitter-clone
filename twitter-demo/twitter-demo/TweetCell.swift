@@ -144,8 +144,11 @@ class TweetCell: UITableViewCell {
     
     @IBAction func onRetweetClicked(_ sender: Any) {
         if(hasRetweeted == false){
-            tweet?.retweetCount += 1
-            hasRetweeted = true
+            TwitterClient.retweet(id: (self.tweet?.tweetID!)!, callBack: { (tweet, error) in
+                tweet?.retweetCount += 1
+                self.hasRetweeted = true
+            })
+            
         } else{
             tweet?.retweetCount -= 1
             hasRetweeted = false
