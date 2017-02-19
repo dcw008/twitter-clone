@@ -75,9 +75,6 @@
                                                         <constraint firstAttribute="height" constant="60" id="Sgd-c6-FuY"/>
                                                         <constraint firstAttribute="width" constant="60" id="v7m-Fb-pvY"/>
                                                     </constraints>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="FkB-Ed-Qcf" appends="YES" id="g02-TH-5OZ"/>
-                                                    </connections>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="userName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yS-b5-39q">
                                                     <rect key="frame" x="76" y="8" width="71" height="17"/>
@@ -203,11 +200,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ID-3h-8OJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <gestureRecognizer id="FkB-Ed-Qcf">
-                    <connections>
-                        <segue destination="9yH-3l-s3a" kind="show" identifier="onProfilePicture" id="U4i-at-hOX"/>
-                    </connections>
-                </gestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1621.5999999999999" y="130.88455772113943"/>
         </scene>
@@ -509,7 +501,7 @@
         <!--Profile View Controller-->
         <scene sceneID="2LM-ry-ocQ">
             <objects>
-                <viewController id="MBO-10-zAY" customClass="ProfileViewController" customModule="twitter_demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="MBO-10-zAY" customClass="ProfileViewController" customModule="twitter_demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="poY-kt-I98"/>
                         <viewControllerLayoutGuide type="bottom" id="TMj-ru-wCU"/>

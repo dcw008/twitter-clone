@@ -64,27 +64,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.tweet = tweets[indexPath.row]
         
-//        let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_gesture:)))
-//        cell.profilePicture.addGestureRecognizer(userProfileTap)
-        
-//        self.indexPath = indexPath
-        
         cell.delegate = self
         
         
         return cell
         
     }
-    
-//    func userProfileTapped(_gesture: UIGestureRecognizer){
-//        
-//        performSegue(withIdentifier: "onProfilePicture", sender: self)
-//        
-//    }
-//    func profileImageTapped(cell: TweetCell, indexPath: IndexPath) {
-//        //self.indexPath = indexPath
-//        self.performSegue(withIdentifier: "onProfilePicture", sender: self)
-//    }
+
     
     
     
@@ -130,41 +116,17 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             let composeTweetNavController: UINavigationController = segue.destination as! UINavigationController
             let composeTweetVC: CreateTweetViewController = composeTweetNavController.topViewController as! CreateTweetViewController
-            // Now set the data:
-//            composeTweetVC.currentUser = User.currentUser
+
            
         }
         
-//        if(segue.identifier == "onProfilePicture"){
-////            let cell = sender as! UIImageView
-////            let indexPath = tableView.indexPath(for: cell)
-////            let tweet = tweets[indexPath!.row]
-//            
-//            var indexPath : IndexPath?
-//            if let image = sender as? UIImageView {
-//                let cell = image.superview?.superview as! UITableViewCell
-//                indexPath = tableView.indexPath(for: cell)!
-//                
-//            }
-//            
-//            let tweet = tweets[indexPath!.row]
-//            
-//            
-//            let profileNavigationController: UINavigationController = segue.destination as! UINavigationController
-//            
-//            let profileVC: ProfileViewController = profileNavigationController.topViewController as! ProfileViewController
-//            profileVC.u = tweet
-//            
-//        }
+
         
     }
     
 
     
-//    func profilePictureTapped(tapGestureRecognizer: UITapGestureRecognizer){
-//        let tappedImage = tapGestureRecognizer.view as! UIImageView
-//        performSegue(withIdentifier: "onProfilePicture", sender: <#T##Any?#>)
-//    }
+
 
 
     
@@ -175,7 +137,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 extension TweetsViewController: TweetCellDelegate{
     func profileImageTapped(cell: TweetCell, user: NSDictionary) {
-        let storyboard = UIStoryboard(name: "main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController{
             profileVC.user = user //set the profile user before your push
             self.navigationController?.pushViewController(profileVC, animated: true)
