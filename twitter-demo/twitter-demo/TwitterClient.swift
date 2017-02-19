@@ -14,7 +14,8 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     static let oAuthBaseUrl = "https://api.twitter.com"
     static let sendTweetEndPoint = TwitterClient.oAuthBaseUrl + "/1.1/statuses/update.json?status="
-    static let retweetEndpoint = TwitterClient.oAuthBaseUrl + "/1.1/statuses/retweet/:id.json"
+    static let retweetEndpoint = TwitterClient.oAuthBaseUrl + "/1.1/statuses/retweet/"
+    static let favoriteEndpoint = "https://api.twitter.com/1.1/favorites/create.json?id="
     
     var loginSuccess: (()->())?
     var loginFailure: ((Error)->())?
@@ -123,6 +124,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     class func retweet(id: String, callBack: @escaping (_ response: Tweet?, _ error: Error?) -> Void){
+        let retweetEndpoint = self.retweetEndpoint + id + ".json"
         TwitterClient.sharedInstance?.post(retweetEndpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             if let tweetDict = response as? [String: Any]{
                 var tweet: Tweet?
@@ -134,11 +136,22 @@ class TwitterClient: BDBOAuth1SessionManager {
             } else {
                 callBack(nil, nil)
             }
+            
         
         }, failure: { (task: URLSessionDataTask?, error: Error) in
             print(error.localizedDescription)
             callBack(nil, error)
             
+        })
+    }
+    
+    class func favorite(id: String, success: @escaping () -> (), failure: @escaping (Error) -> () ){
+        let favoriteEndPoint = self.favoriteEndpoint  + id
+        TwitterClient.sharedInstance?.post(favoriteEndPoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:Any?) in
+            success()
+            print("favorite success")
+        }, failure: { (task: URLSessionDataTask?, error:Error) in
+            failure(error)
         })
     }
 

@@ -132,28 +132,41 @@ class TweetCell: UITableViewCell {
 
     @IBAction func onFavoritesClicked(_ sender: Any) {
         if(hasFavorited == false){
-            tweet?.favoritesCount += 1
-            hasFavorited = true
-        } else{
-            tweet?.favoritesCount -= 1
-            hasFavorited = false
+            
+            TwitterClient.favorite(id: (tweet?.tweetID)!, success: { 
+                self.tweet?.favoritesCount += 1
+                self.hasFavorited = true
+                self.favoriteLabel.text = "\(self.tweet!.favoritesCount)"
+                print("hi")
+            }, failure: { (error: Error) in
+                print(error.localizedDescription)
+            })
+            
         }
-        self.favoriteLabel.text = "\(tweet!.favoritesCount)"
+//        else{
+//            tweet?.favoritesCount -= 1
+//            hasFavorited = false
+//        }
+        
        
     }
     
     @IBAction func onRetweetClicked(_ sender: Any) {
         if(hasRetweeted == false){
-            TwitterClient.retweet(id: (self.tweet?.tweetID!)!, callBack: { (tweet, error) in
-                tweet?.retweetCount += 1
-                self.hasRetweeted = true
-            })
             
-        } else{
-            tweet?.retweetCount -= 1
-            hasRetweeted = false
+            TwitterClient.retweet(id: (tweet?.tweetID)!, callBack: { (tweet, error) in
+                
+            })
+            tweet?.retweetCount += 1
+            self.hasRetweeted = true
+            self.retweetCountLabel.text = "\(self.tweet!.retweetCount)"
+            
         }
-        self.retweetCountLabel.text = "\(tweet!.retweetCount)"
+//        else{
+//            tweet?.retweetCount -= 1
+//            hasRetweeted = false
+//        }
+        
     }
     
     

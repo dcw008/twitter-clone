@@ -128,10 +128,20 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            let indexPath = tableView.indexPath(for: cell)
 //            let tweet = tweets[indexPath!.row]
             
+            var indexPath : IndexPath?
+            if let image = sender as? UIImageView {
+                let cell = image.superview?.superview as! UITableViewCell
+                indexPath = tableView.indexPath(for: cell)!
+                
+            }
+            
+            let tweet = tweets[indexPath!.row]
+            
+            
             let profileNavigationController: UINavigationController = segue.destination as! UINavigationController
             
             let profileVC: ProfileViewController = profileNavigationController.topViewController as! ProfileViewController
-//            profileVC.tweet = tweet
+            profileVC.tweet = tweet
             
         }
         
