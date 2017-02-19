@@ -139,14 +139,30 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
        
     }
-    /*
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        //deselect of the gray cell
+        tableView.deselectRow(at: indexPath, animated:true)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        //get the tweet associated with the current cell
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let tweet = tweets[indexPath!.row]
+        
+        let detailViewController = segue.destination as! DetailsTweetController
+        
+        
+        //pass the tweet
+        detailViewController.tweet = tweet
     }
-    */
+ 
 
 }
