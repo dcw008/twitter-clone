@@ -11,6 +11,7 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tweets: [Tweet]!
+    var indexPath: IndexPath?
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -63,18 +64,29 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.tweet = tweets[indexPath.row]
         
-        let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_gesture:)))
-        cell.profilePicture.addGestureRecognizer(userProfileTap)
+//        let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_gesture:)))
+//        cell.profilePicture.addGestureRecognizer(userProfileTap)
+        
+//        self.indexPath = indexPath
+        
+        cell.delegate = self
+        
         
         return cell
         
     }
     
-    func userProfileTapped(_gesture: UIGestureRecognizer){
-        
-        performSegue(withIdentifier: "onProfilePicture", sender: self)
-        
-    }
+//    func userProfileTapped(_gesture: UIGestureRecognizer){
+//        
+//        performSegue(withIdentifier: "onProfilePicture", sender: self)
+//        
+//    }
+//    func profileImageTapped(cell: TweetCell, indexPath: IndexPath) {
+//        //self.indexPath = indexPath
+//        self.performSegue(withIdentifier: "onProfilePicture", sender: self)
+//    }
+    
+    
     
     //deselects the gray area after user pushes on the cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
@@ -147,12 +159,28 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+
+    
 //    func profilePictureTapped(tapGestureRecognizer: UITapGestureRecognizer){
 //        let tappedImage = tapGestureRecognizer.view as! UIImageView
 //        performSegue(withIdentifier: "onProfilePicture", sender: <#T##Any?#>)
 //    }
     
 
+    
+
 
 
 }
+
+extension TweetsViewController: TweetCellDelegate{
+    func profileImageViewTapped(cell: TweetCell, user: NSDictionary) {
+        let storyboard = UIStoryboard(name: "main", bundle: nil)
+        if let profileVC = storyboard.instantiateViewController(withIdentifier: StorybordIdentifier.ProfileTableViewControllerIden) as? ProfileTableViewController{
+            profileVC.user = user //set the profile user before your push
+            self.navigationController?.pushViewController(profileVC, animated: true)
+        }
+    }
+}
+
+

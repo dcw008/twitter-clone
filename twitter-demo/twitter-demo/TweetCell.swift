@@ -8,9 +8,19 @@
 
 import UIKit
 
+protocol TweetCellDelegate: class {
+    func profileImageTapped(cell: TweetCell, user: NSDictionary)
+}
+
 class TweetCell: UITableViewCell {
     
+    var indexPath: IndexPath?
+    weak var delegate: TweetCellDelegate?
+    
+    
     @IBOutlet weak var profilePicture: UIImageView!
+    
+
    
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var screenName: UILabel!
@@ -54,10 +64,21 @@ class TweetCell: UITableViewCell {
 //                
                 self.retweetCountLabel.text = "\(tweet.retweetCount)"
                 self.favoriteLabel.text = "\(tweet.favoritesCount)"
+                
+                self.profilePicture.isUserInteractionEnabled = true //make sure this is enabled
+                //tap for userImageView
+                let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_:)))
+                self.profilePicture.addGestureRecognizer(userProfileTap)
 
                                 
             }
             
+        }
+    }
+    
+    func userProfileTapped(_ gesture: UITapGestureRecognizer){
+        if let delegate = delegate{
+            delegate.profileImageTapped(cell: self, user: (self.tweet?.user)!)
         }
     }
     
@@ -143,11 +164,6 @@ class TweetCell: UITableViewCell {
             })
             
         }
-//        else{
-//            tweet?.favoritesCount -= 1
-//            hasFavorited = false
-//        }
-        
        
     }
     
@@ -162,11 +178,6 @@ class TweetCell: UITableViewCell {
             self.retweetCountLabel.text = "\(self.tweet!.retweetCount)"
             
         }
-//        else{
-//            tweet?.retweetCount -= 1
-//            hasRetweeted = false
-//        }
-        
     }
     
     
