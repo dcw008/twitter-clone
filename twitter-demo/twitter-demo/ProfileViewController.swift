@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    var tweet: Tweet!
+    var user: NSDictionary?
 
     override func viewDidLoad() {
         super.viewDidLoad()

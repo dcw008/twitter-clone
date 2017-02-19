@@ -135,27 +135,27 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
            
         }
         
-        if(segue.identifier == "onProfilePicture"){
-//            let cell = sender as! UIImageView
-//            let indexPath = tableView.indexPath(for: cell)
+//        if(segue.identifier == "onProfilePicture"){
+////            let cell = sender as! UIImageView
+////            let indexPath = tableView.indexPath(for: cell)
+////            let tweet = tweets[indexPath!.row]
+//            
+//            var indexPath : IndexPath?
+//            if let image = sender as? UIImageView {
+//                let cell = image.superview?.superview as! UITableViewCell
+//                indexPath = tableView.indexPath(for: cell)!
+//                
+//            }
+//            
 //            let tweet = tweets[indexPath!.row]
-            
-            var indexPath : IndexPath?
-            if let image = sender as? UIImageView {
-                let cell = image.superview?.superview as! UITableViewCell
-                indexPath = tableView.indexPath(for: cell)!
-                
-            }
-            
-            let tweet = tweets[indexPath!.row]
-            
-            
-            let profileNavigationController: UINavigationController = segue.destination as! UINavigationController
-            
-            let profileVC: ProfileViewController = profileNavigationController.topViewController as! ProfileViewController
-            profileVC.tweet = tweet
-            
-        }
+//            
+//            
+//            let profileNavigationController: UINavigationController = segue.destination as! UINavigationController
+//            
+//            let profileVC: ProfileViewController = profileNavigationController.topViewController as! ProfileViewController
+//            profileVC.u = tweet
+//            
+//        }
         
     }
     
@@ -165,7 +165,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        let tappedImage = tapGestureRecognizer.view as! UIImageView
 //        performSegue(withIdentifier: "onProfilePicture", sender: <#T##Any?#>)
 //    }
-    
+
 
     
 
@@ -174,9 +174,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 }
 
 extension TweetsViewController: TweetCellDelegate{
-    func profileImageViewTapped(cell: TweetCell, user: NSDictionary) {
+    func profileImageTapped(cell: TweetCell, user: NSDictionary) {
         let storyboard = UIStoryboard(name: "main", bundle: nil)
-        if let profileVC = storyboard.instantiateViewController(withIdentifier: StorybordIdentifier.ProfileTableViewControllerIden) as? ProfileTableViewController{
+        if let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController{
             profileVC.user = user //set the profile user before your push
             self.navigationController?.pushViewController(profileVC, animated: true)
         }
