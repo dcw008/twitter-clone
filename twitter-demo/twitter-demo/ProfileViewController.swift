@@ -9,6 +9,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,10 @@ class ProfileViewController: UIViewController {
     }
     
 
+    @IBAction func onBackButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     /*
     // MARK: - Navigation
 

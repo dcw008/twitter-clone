@@ -62,7 +62,17 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
+        
+        let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_gesture:)))        
+        cell.profilePicture.addGestureRecognizer(userProfileTap)
+         //assign the cell's delegate to this view controller, so that this controller can handle pushing the cell or perform segue
+        
         return cell
+        
+    }
+    
+    func userProfileTapped(_gesture: UIGestureRecognizer){
+        performSegue(withIdentifier: "onProfilePicture", sender: self)
         
     }
     
@@ -115,7 +125,20 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
            
         }
         
+        if(segue.identifier == "onProfilePicture"){
+            let profileNavigationController: UINavigationController = segue.destination as! UINavigationController
+            
+            let profileVC: ProfileViewController = profileNavigationController.topViewController as! ProfileViewController
+        }
+        
     }
+    
+//    func profilePictureTapped(tapGestureRecognizer: UITapGestureRecognizer){
+//        let tappedImage = tapGestureRecognizer.view as! UIImageView
+//        performSegue(withIdentifier: "onProfilePicture", sender: <#T##Any?#>)
+//    }
+    
+
 
 
 }
