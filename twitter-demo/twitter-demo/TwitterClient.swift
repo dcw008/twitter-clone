@@ -16,6 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     static let sendTweetEndPoint = TwitterClient.oAuthBaseUrl + "/1.1/statuses/update.json?status="
     static let retweetEndpoint = TwitterClient.oAuthBaseUrl + "/1.1/statuses/retweet/"
     static let favoriteEndpoint = "https://api.twitter.com/1.1/favorites/create.json?id="
+    static let userTimelineEndpoint = "https://api.twitter.com/1.1/statuses/user_timeline.json"
     
     var loginSuccess: (()->())?
     var loginFailure: ((Error)->())?
@@ -74,6 +75,24 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             failure(error)
         })
+    }
+    
+    class func userTimeline(screen_name: String, success: @escaping ([Tweet]) -> (), failure: @escaping(Error) -> ()){
+        let url = self.userTimelineEndpoint + "?" + "screen_name=" + screen_name  
+        TwitterClient.sharedInstance?.get(url, parameters: nil, progress: nil,
+            
+            success: { (task: URLSessionDataTask, response: Any?) in
+                let dictionaries = response as! [NSDictionary]
+                
+                let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+                
+                success(tweets)
+                
+        }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+            
+            failure(error)
+        })
+            
     }
     
     
