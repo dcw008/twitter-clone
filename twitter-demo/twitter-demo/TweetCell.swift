@@ -32,9 +32,7 @@ class TweetCell: UITableViewCell {
     
     var hasRetweeted = false
     var hasFavorited = false
-    
 
-    
     
     var tweet: Tweet?{
         

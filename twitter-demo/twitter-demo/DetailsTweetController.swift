@@ -38,7 +38,6 @@ class DetailsTweetController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadUI()
 
         // Do any additional setup after loading the view.
@@ -53,7 +52,7 @@ class DetailsTweetController: UIViewController {
     
     //setup the UI on the view
     func loadUI(){
-        
+        self.navigationController?.navigationBar.tintColor = UIColor(red:0.00, green:0.57, blue:1.00, alpha:1.0)
         self.userNameLabel.text = tweet.userName
         self.screenNameLabel.text = tweet.screenName
         self.tweetTextLabel.text = tweet.text!

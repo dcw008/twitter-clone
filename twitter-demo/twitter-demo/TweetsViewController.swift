@@ -41,10 +41,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }, failure: { (error: Error) in
             print(error.localizedDescription)
         })
+        
+        setUpNavBar()
 
         // Do any additional setup after loading the view.
     }
-
+    
+    //sets up the custom navigation bar
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -71,8 +75,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
 
-    
-    
+
     
     //deselects the gray area after user pushes on the cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
@@ -86,17 +89,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         TwitterClient.sharedInstance?.logout()
     }
-    
-    
-   
-    
+
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        
         //check if sender identifier is requesting to see the detailed tweet.
         if(segue.identifier == "viewDetailedTweet"){
             //get the tweet associated with the current cell
@@ -105,7 +102,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let tweet = tweets[indexPath!.row]
             
             let detailViewController = segue.destination as! DetailsTweetController
-            
             
             //pass the tweet
             detailViewController.tweet = tweet
@@ -116,14 +112,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             let composeTweetNavController: UINavigationController = segue.destination as! UINavigationController
             let composeTweetVC: CreateTweetViewController = composeTweetNavController.topViewController as! CreateTweetViewController
-
-           
         }
         
 
         
     }
-
+    
 
 
 }
